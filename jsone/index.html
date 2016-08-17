@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>jsone Demo</title>
+        <meta charset="utf-8" />
+        <meta name="description" content="Test the display and usage of jsone during development">
+        <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1, user-scalable=yes">
+        <style>
+            body{
+                font-family:Helvetica;
+                margin:10px;
+                padding:0;
+            }
+            #jsone-logs{
+                background-color:#666;
+                color: #ccc;
+                max-height: 200px;
+                overflow:auto;
+            }
+            #jsone-logs div{
+                white-space:nowrap;
+                padding:4px 4px 0 4px;
+            }
+            #jsone-logs div:last-child{
+                padding-bottom: 4px;
+            }
+            #jsone-logs div b{
+                color:#fff;
+            }
+        </style>
+    </head>
+    <body>
+
+        <div id="jsone"></div>
+        <br><br>
+        <div>Event Logs</div>
+        <div id="jsone-logs"></div>
+        <script src="https://cdn.rawgit.com/pleaseshutup/jsone/master/jsone.js"></script>
+
+        <script>
+            var demo = new jsone({
+                    node: document.getElementById('jsone'),
+                    json: 'https://cdn.rawgit.com/pleaseshutup/jsone/master/demoJSON.json',
+                    schema: 'https://cdn.rawgit.com/pleaseshutup/jsone/master/demoJSON.json',
+                    hashNavigation: true
+                });
+
+            demo.on('event', function(args){
+                jsoneLog(args)
+            })
+        </script>
+
+        <script>
+
+            var DOM = function(sel, target) {
+                return new __mdd(sel, target);
+            };
+            // demo/local dev helpers
+            var logdiv = document.getElementById('jsone-logs');
+            function jsoneLog(args){
+                console.log('jsone event', args[0], args)
+                DOM().new('div').html('<b>'+args[0]+':</b> '+JSON.stringify(args)).appendTo(DOM(logdiv))
+                logdiv.scrollTop = logdiv.scrollHeight;
+            }
+        </script>
+
+    </body>
+</html>
