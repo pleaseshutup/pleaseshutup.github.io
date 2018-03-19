@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>mimaCharts Demo - Minimal Material Charts</title>
+        <meta charset="utf-8" />
+        <meta name="description" content="Include line charts, pie charts, bar charts, and donut charts to your web app with minimal added bytes">
+        <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1, user-scalable=yes">
+        <style>
+            body{
+                font-family:Helvetica;
+                margin:10px;
+                padding:0;
+            }
+        </style>
+    </head>
+    <body>
+        <section>
+            <h1>mimCharts is a minimal charting library based on material design.</h1>
+        </section>
+        <section>
+            <h2>Line Chart</h2>
+            <div style="max-width: 800px">
+                <mimachart>
+                    <json style="display:none">
+                    {
+                        "config":{
+                            "type": "line"
+                        },
+                        "data":[{
+                            "l": "Mark 1",
+                            "v": 10
+                        }, {
+                            "l": "Mark 2",
+                            "v": 20
+                        }, {
+                            "l": "Mark 3",
+                            "v": 15
+                        }, {
+                            "l": "Mark 4",
+                            "v": 22
+                        }, {
+                            "l": "Mark 5",
+                            "v": 18
+                        }]
+                    }
+                    </json>
+                </mimachart>
+            </div>
+        </section>
+
+        <section>
+            <h2>Bar Chart</h2>
+            <div style="max-width: 800px">
+                <mimachart>
+                    <json style="display:none">
+                    {
+                        "config":{
+                            "type": "bar"
+                        },
+                        "data":[{
+                            "l": "Mark 1",
+                            "v": 10
+                        }, {
+                            "l": "Mark 2",
+                            "v": 20
+                        }, {
+                            "l": "Mark 3",
+                            "v": 15
+                        }, {
+                            "l": "Mark 4",
+                            "v": 22
+                        }, {
+                            "l": "Mark 5",
+                            "v": 18
+                        }]
+                    }
+                    </json>
+                </mimachart>
+            </div>
+        </section>
+
+        <section>
+            <h2>Pie Chart</h2>
+            <div style="max-width: 800px">
+                <mimachart>
+                    <json style="display:none">
+                    {
+                        "config":{
+                            "type": "pie"
+                        },
+                        "data":[{
+                            "l": "Mark 1",
+                            "v": 10
+                        }, {
+                            "l": "Mark 2",
+                            "v": 20
+                        }, {
+                            "l": "Mark 3",
+                            "v": 15
+                        }, {
+                            "l": "Mark 4",
+                            "v": 22
+                        }, {
+                            "l": "Mark 5",
+                            "v": 18
+                        }]
+                    }
+                    </json>
+                </mimachart>
+            </div>
+        </section>
+
+        <script src="../../mimaCharts/mimaCharts.js"></script>
+        <script>initMimaCharts()</script>
+    </body>
+</html>
