@@ -5,112 +5,110 @@
         <meta charset="utf-8" />
         <meta name="description" content="Include line charts, pie charts, bar charts, and donut charts to your web app with minimal added bytes">
         <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1, user-scalable=yes">
+        <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
         <style>
-            body{
-                font-family:Helvetica;
-                margin:10px;
+            html, body{
+                font-family:'Roboto', sans-serif;
+                margin:0px;
                 padding:0;
+                background-color:#333;
+            }
+            .content {
+                overflow:hidden;
+                background-color:#fff;
+                max-width: 800px;
+                padding: 20px;
+                box-sizing: border-box;
+                margin: 0 auto;
+            }
+            h1, h2, h3 {
+                font-weight: 300;
+            }
+            button {
+                cursor: pointer;
+                border: 1px solid #eaeaea;
+                background: #eaeaea;
+                text-transform: uppercase;
+                font-size: 12px;
+                padding: 4px 12px;
             }
         </style>
     </head>
     <body>
-        <section>
-            <h1>mimCharts is a minimal charting library based on material design.</h1>
-        </section>
-        <section>
-            <h2>Line Chart</h2>
-            <div style="max-width: 800px">
-                <mimachart>
-                    <json style="display:none">
-                    {
-                        "config":{
-                            "type": "line"
-                        },
-                        "data":[{
-                            "l": "Mark 1",
-                            "v": 10
-                        }, {
-                            "l": "Mark 2",
-                            "v": 20
-                        }, {
-                            "l": "Mark 3",
-                            "v": 15
-                        }, {
-                            "l": "Mark 4",
-                            "v": 22
-                        }, {
-                            "l": "Mark 5",
-                            "v": 18
-                        }]
-                    }
-                    </json>
-                </mimachart>
-            </div>
-        </section>
+        <div class="content">
+            <section>
+                <h1><a href="https://www.github.com/pleaseshutup/mimaCharts">mimaCharts</a> is a minimal charting library based on material design.</h1>
+                <p>mimaCharts includes <a href="https://www.github.com/pleaseshutup/underdom">underdom</a> for simple dom manipulation and this demo uses <a href="https://www.github.com/pleaseshutup/jsone">jsone</a> to edit the JSON that generates the chart</p>
+            </section>
+            <section>
+                <div style="padding: 20px 0 40px 0">
+                    <button>Line</button>
+                    <button>Bar</button>
+                    <button>Pie</button>
+                    <button>Donut</button>
+                </div>
 
-        <section>
-            <h2>Bar Chart</h2>
-            <div style="max-width: 800px">
-                <mimachart>
-                    <json style="display:none">
-                    {
-                        "config":{
-                            "type": "bar"
-                        },
-                        "data":[{
-                            "l": "Mark 1",
-                            "v": 10
-                        }, {
-                            "l": "Mark 2",
-                            "v": 20
-                        }, {
-                            "l": "Mark 3",
-                            "v": 15
-                        }, {
-                            "l": "Mark 4",
-                            "v": 22
-                        }, {
-                            "l": "Mark 5",
-                            "v": 18
-                        }]
-                    }
-                    </json>
-                </mimachart>
-            </div>
-        </section>
+                <div style="border-bottom: 1px solid #eaeaea;margin-bottom:40px"></div>
+                <div id="mimachart"></div>
+                <div style="border-bottom: 1px solid #eaeaea;margin-bottom:40px"></div>
 
-        <section>
-            <h2>Pie Chart</h2>
-            <div style="max-width: 800px">
-                <mimachart>
-                    <json style="display:none">
-                    {
-                        "config":{
-                            "type": "pie"
-                        },
-                        "data":[{
-                            "l": "Mark 1",
-                            "v": 10
-                        }, {
-                            "l": "Mark 2",
-                            "v": 20
-                        }, {
-                            "l": "Mark 3",
-                            "v": 15
-                        }, {
-                            "l": "Mark 4",
-                            "v": 22
-                        }, {
-                            "l": "Mark 5",
-                            "v": 18
-                        }]
-                    }
-                    </json>
-                </mimachart>
-            </div>
-        </section>
+                <div id="jsone-editor"></div>
+            </section>
 
-        <script src="../../mimaCharts/mimaCharts.js"></script>
-        <script>initMimaCharts()</script>
+        </div>
+        <!--<script src="../../mimaCharts/mimaCharts.js"></script>
+        <script src="../../jsone/jsone.js"></script>-->
+        <script src="https://cdn.rawgit.com/pleaseshutup/jsone/master/mimaCharts.js"></script>
+        <script src="https://cdn.rawgit.com/pleaseshutup/jsone/master/jsone.js"></script>
+        <script>
+            var mimaChartDOM = document.getElementById('mimachart');
+            var json = new jsone({
+                node: document.getElementById('jsone-editor'),
+                json: {
+                            "config":{
+                                "type": "line"
+                            },
+                            "data":[{
+                                "l": "Mark 1",
+                                "v": 10
+                            }, {
+                                "l": "Mark 2",
+                                "v": 20
+                            }, {
+                                "l": "Mark 3",
+                                "v": 15
+                            }, {
+                                "l": "Mark 4",
+                                "v": 22
+                            }, {
+                                "l": "Mark 5",
+                                "v": 18
+                            }]
+                        },
+                //schema: '../../mimaCharts/schema.json'
+                schema: 'https://cdn.rawgit.com/pleaseshutup/jsone/master/schema.json'
+            });
+            function reRenderCharts() {
+                var h = mimaChartDOM.innerHeight + 'px';
+                mimaChartDOM.style.height = h;
+                mimaChartDOM.innerHTML = '';
+                document.getElementById('mimachart').appendChild(mimaCharts(json.__json.config, json.__json.data).chart)
+                mimaChartDOM.style.height = '';
+            }
+
+            json.on('event', function(event){
+                console.log('event', event)
+                if(event[0] === 'jsonready' || event[0] === 'change') {
+                    reRenderCharts()
+                }
+            });
+
+            [].slice.call(document.querySelectorAll('button')).forEach(function(button){
+                button.addEventListener('click', function(e){
+                    json.__json.config.type = button.textContent.toLowerCase();
+                    reRenderCharts()
+                })
+            })
+        </script>
     </body>
 </html>
